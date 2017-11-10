@@ -7,7 +7,7 @@ A command line client for tldr, written in plain ISO C90.
 ## Installing
 To build the latest version from source:
 ```
-git clone https://github.com/tldr-pages/tldr-cpp-client.git tldr-c-client
+git clone https://github.com/soulomoon/tldr-cpp-client.git tldr-c-client
 cd tldr-c-client
 
 ./deps.sh           # install dependencies
