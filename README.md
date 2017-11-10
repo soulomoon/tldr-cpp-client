@@ -86,6 +86,7 @@ available commands:
     -h, --help           print this help and exit
     -u, --update         update local database
     -c, --clear-cache    clear local database
+    -o, --onelinecheck   perform searchsearching usage online if not found in local database 
     -p, --platform=PLATFORM select platform, supported are linux / osx / sunos / common
     -r, --render=PATH    render a local page for testing purposes
 ```

@@ -32,11 +32,13 @@ static int update_flag;
 static int clear_flag;
 static int platform_flag;
 static int render_flag;
+static int onlinecheck_flag;
 static char pbuf[STRBUFSIZ];
 static struct option long_options[] = {
     { "help", no_argument, &help_flag, 1 },
     { "version", no_argument, &version_flag, 1 },
     { "verbose", no_argument, &verbose_flag, 1 },
+    { "onlinecheck", no_argument, &onlinecheck_flag, 1 },
 
     { "update", no_argument, &update_flag, 1 },
     { "clear-cache", no_argument, &clear_flag, 1 },
@@ -68,6 +70,10 @@ main(int argc, char **argv)
         switch (c) {
         case 0:
             break;
+
+		case 'o':
+			onlinecheck_flag = 1;
+			break;
 
         case 'v':
             verbose_flag = 1;
@@ -157,9 +163,14 @@ main(int argc, char **argv)
 
         if (!has_localdb())
             update_localdb(verbose_flag);
-        if (print_tldrpage(buf, pbuf[0] != 0 ? pbuf : NULL)) {
-            fprintf(stdout, "This page doesn't exist yet!\n");
-            fprintf(stdout, "Submit new pages here: https://github.com/tldr-pages/tldr\n");
+        if (print_tldrpage(buf, pbuf[0] != 0 ? pbuf : NULL, onlinecheck_flag)) {
+			if (onlinecheck_flag) {
+				fprintf(stdout, "This page doesn't exist yet!\n");
+				fprintf(stdout, "Submit new pages here: https://github.com/tldr-pages/tldr\n");
+			} else {
+				fprintf(stdout, "This page doesn't exist in cache!\n");
+				fprintf(stdout, "pleaze try to use command with -o to check the online document too!\n");
+			}
             return EXIT_FAILURE;
         }
     }
@@ -193,6 +204,7 @@ print_usage(char const *arg)
     fprintf(stdout, "    %-20s %-30s\n", "-h, --help", "print this help and exit");
     fprintf(stdout, "    %-20s %-30s\n", "-u, --update", "update local database");
     fprintf(stdout, "    %-20s %-30s\n", "-c, --clear-cache", "clear local database");
+    fprintf(stdout, "    %-20s %-30s\n", "-o, --onelinecheck-flag", "find command via net if not in local");
     fprintf(stdout, "    %-20s %-30s\n", "-p, --platform=PLATFORM",
             "select platform, supported are linux / osx / sunos / common");
     fprintf(stdout, "    %-20s %-30s\n", "-r, --render=PATH",

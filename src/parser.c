@@ -139,7 +139,7 @@ parse_tldrpage(char const *input)
 }
 
 int
-print_tldrpage(char const *input, char const *poverride)
+print_tldrpage(char const *input, char const *poverride, int const onlinecheck)
 {
     int islinux;
     int isdarwin;
@@ -212,18 +212,20 @@ print_tldrpage(char const *input, char const *poverride)
 
     /* make clang's static analyzer happy */
     output = NULL;
-    download_content(url, &output, 0);
-    if (output == NULL) {
-        construct_url(url, URLBUFSIZ, input, "common");
-        download_content(url, &output, 0);
-        if (output == NULL)
-            return 1;
-    }
-
-    parse_tldrpage(output);
-
+	if (onlinecheck) {
+		download_content(url, &output, 0);
+		if (output == NULL) {
+			construct_url(url, URLBUFSIZ, input, "common");
+			download_content(url, &output, 0);
+			if (output == NULL)
+				return 1;
+		}
+		parse_tldrpage(output);
+		free(output);
+		return 0;
+	}
     free(output);
-    return 0;
+    return 1;
 }
 
 int

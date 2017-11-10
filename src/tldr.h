@@ -67,7 +67,7 @@ int         construct_url           (char *buf, size_t buflen,
 int         construct_path          (char *buf, size_t buflen, char const *home,
                                      char const *input, char const *platform);
 int         parse_tldrpage          (char const *input);
-int         print_tldrpage          (char const *input, char const *platform);
+int         print_tldrpage          (char const *input, char const *platform, int const onlinecheck);
 int         print_localpage         (char const *path);
 
 /* utils.c */
