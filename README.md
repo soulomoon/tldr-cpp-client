@@ -32,7 +32,7 @@ Building the `tldr` client is pretty straightforward.
 
 #### Compiling
 
-The [`Makefile`](https://github.com/tldr-pages/tldr-cpp-client/blob/master/Makefile)
+The [`Makefile`](https://github.com/soulomoon/tldr-cpp-client/blob/master/Makefile)
 in the root directory has all you need for builing the project.
 
 Just call `make` and `tldr` will build itself.
