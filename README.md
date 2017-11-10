@@ -1,21 +1,10 @@
-# tldr c client <a href='https://travis-ci.org/tldr-pages/tldr-cpp-client'><img src='https://travis-ci.org/tldr-pages/tldr-cpp-client.svg' align="right"></a>
+# tldr c client
 
 
 A command line client for tldr, written in plain ISO C90.
 
 
 ## Installing
-
-On OS X, the client can be installed through [homebrew](http://brew.sh/).
-
-```
-# To install latest development version
-brew install tldr --HEAD
-
-# To install the latest stable release
-brew install tldr
-```
-
 To build the latest version from source:
 ```
 git clone https://github.com/tldr-pages/tldr-cpp-client.git tldr-c-client
